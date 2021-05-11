@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/nouislider.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Корзина</title>
+</head>
+
+<body>
+
+    <!-- Оболочка -->
+    <div class="wrapper">
+        <!-- Верхняя часть страницы -->
+        <header class="header">
+            <div class="header__body _container">
+                <div class="header__top">
+                    <div class="header__logo"><img src="images/1.header/1.logo.png" alt="logo"></div>
+                    <a href="tel:+79502786300" class="header__tel">8 (800) 555 35-35</a>
+                    <div class="header__search">
+                        <div class="header__search-input">
+                            <input type="text" class="search" placeholder="Поиск товара" name="search">
+                            <button class="header__search-btn" type="submit">поиск</button>
+                        </div>
+                        <div class="header__search-example">
+                            Например:
+                            <ul>
+                                <li><a href="#">аравия</a></li>
+                                <li><a href="#">северная звезда</a></li>
+                                <li><a href="#">пимекролимус</a></li>
+                                <li><a href="#">вольтарен</a></li>
+                                <li><a href="#">нурофен</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="cart.html" class="header__cart">
+                        <img src="images/1.header/2.cart.svg" alt="Cart">
+                        Корзина
+                    </a>
+                </div>
+                <div class="header__bottom">
+                    <div class="header__icon menu-icon">
+                        <span></span>
+                    </div>
+                    <div class="header__menu menu">
+                        <div class="menu__body">
+                        </div>
+                    </div>
+                    <div class="header__search-input">
+                        <input type="text" class="search" placeholder="Поиск товара" name="search">
+                        <button class="header__search-btn" type="submit">поиск</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Основная часть страницы -->
+        <main class="main">
+            <div class="main__body _container">
+                <aside class="aside">
+                    <div class="aside__tabs">
+                        <a href="#tab_1" class="aside__tab _active">Подобрать</a>
+                        <a href="#tab_2" class="aside__tab">Товары</a>
+                    </div>
+                    <div class="aside__body">
+                        <div id="tab_1" class="aside__block _active">
+                            <nav class="aside__nav">
+                                <ul>
+                                    <li><a href="#" class="aside__link aside__link_main">Базовый уход</a></li>
+                                    <li><a href="#" class="aside__link _active">Лицо</a></li>
+                                    <li><a href="#" class="aside__link _hide">Телои</a></li>
+                                    <li><a href="#" class="aside__link _hide">Волосы и кожа головы</a></li>
+                                    <li><a href="#" class="aside__link _hide">Для детей</a></li>
+                                    <li><a href="#" class="aside__link _hide">Эфирные масла</a></li>
+                                </ul>
+                                <button class="aside__more-categories">
+                                    <span>все подкатегории</span>
+                                    <img src="images/2.main/5.arrow.svg" alt="arrow">
+                                </button>
+                            </nav>
+                        </div>
+                        <div id="tab_2" class="aside__block">
+                            <nav class="aside__nav">
+                                <ul>
+                                    <li><a href="#" class="aside__link">Лекарственные средства</a></li>
+                                    <li><a href="#" class="aside__link">БАДы</a></li>
+                                    <li><a href="#" class="aside__link">Медицинские товары и техника</a></li>
+                                    <li><a href="#" class="aside__link">Медицинские изделия и контактные линзы</a></li>
+                                    <li><a href="#" class="aside__link">Детские товары</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="aside__filter">
+                        <div class="aside__filter-price">
+                        </div>
+                    </div>
+                </aside>
+                <content class="content">
+                    <div class="content__title">Корзина <span class="count">(10 товаров)</span></div>
+                    <div class="content__body content__body_flex">
+                        <div class="content__cart">
+                        </div>
+                        <div class="content__sidebar">
+                            <div class="content__total">
+                                <div class="content__total-item">
+                                    Выбрано
+                                    <span id="totalCount">5</span>
+                                </div>
+                                <div class="content__total-item content__total-item_min">
+                                    Товары
+                                    <span id="totalPrice" class="price">500.00</span>
+                                </div>
+                                <div class="content__total-item content__total-item_hr">
+                                    Итого
+                                    <span id="total" class="price">500.00</span>
+                                </div>
+                                <button class="content__arrange">Оформить</button>
+                            </div>
+                        </div>
+                    </div>
+                </content>
+            </div>
+        </main>
+
+        <!-- Нижняя часть страницы -->
+        <footer class="footer">
+
+        </footer>
+
+        <!-- Модальные окна -->
+    </div>
+
+    <!-- Файл JavaScript-сценариев -->
+    <script src="script/nouislider.min.js"></script>
+    <script src="script/script.js"></script>
+
+</body>
+
+</html>
