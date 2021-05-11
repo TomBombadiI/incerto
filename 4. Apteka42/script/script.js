@@ -171,6 +171,11 @@ if (cart) {
     cart = {};
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+let countGoodsInCart = lengthObject(cart);
+if (countGoodsInCart) {
+    document.querySelector('.header__cart span').innerText = countGoodsInCart;
+    document.querySelector('.header__cart span').classList.remove('_hide');
+}
 // 2. Изменение кнопки на карточке товара, если он есть в корзине при загрузке страницы
 updateProducts();
 
@@ -180,11 +185,14 @@ function updateProducts(){
     for (let index = 0; index < products.length; index++) {
         const el = products[index],
               id = el.dataset.id,
+              inCart = el.classList.contains('product_cart'),
               bnt = el.querySelector('.product__buy');
-        
+
         if (cart['p_' + id]){
-            updateBtn(bnt, el);
+            updateBtn(bnt, el, inCart);
             el.querySelector('.count').innerText = cart['p_' + id]['count'];
+        } else if (inCart) {
+            el.remove();
         }
     }
 }
@@ -201,7 +209,11 @@ function updateBtn(btn, product, inCart = false) {
             productBtnContainer.innerHTML = productBuyEl;
         }
     } else {
-        inCart.remove();
+        if (cart['p_' + product.dataset.id]) {
+            product.querySelector('.price').innerText = (cart['p_' + product.dataset.id]['count'] * cart['p_' + product.dataset.id]['price']).toFixed(2);
+        } else {
+            product.remove();
+        }
     }
 }
 
@@ -224,20 +236,27 @@ content.addEventListener('click', function (e) {
         const product = target.closest('.product');
 
         addProductToCart(product);
+        renderProductsInCart();
         updateBtn(target, product)
     } else if (target.classList.contains('plus')) {
         const product = target.closest('.product'),
-              inCart = target.closest('.product_cart'),
+              inCart = product.classList.contains('product_cart'),
               price = product.querySelector('.price');
 
-              console.log(price.innerText   );
         if (target.classList.contains('plus_minus')) {
             const count = plusCountProduct('-', product.dataset.id),
                 countEl = product.querySelector('.count');
 
             if (count == 0){
                 updateBtn(target.closest('.product__count'), product, inCart);
-                updateTotal();
+                if (!lengthObject(cart)) {
+                    document.querySelector('.header__cart span').classList.add('_hide');
+                } else {
+                    document.querySelector('.header__cart span').innerText = lengthObject(cart);
+                }
+                updateHistoryProducts(); 
+                if (totalContainer) updateTotal();
+
             } else {
                 countEl.innerText = count;
                 if (inCart) {
@@ -258,42 +277,97 @@ content.addEventListener('click', function (e) {
             };
         }
         localStorage.setItem('cart', JSON.stringify(cart));
+        updateProducts();
+        if (totalContainer) {
+            updateTotal();
+        }
     } else if (target.classList.contains('product__delete')) {
         const product = target.closest('.product'),
               id = product.dataset.id,
               lenghtHistoryCart = lengthObject(historyCart);
         
         product.remove();
-        if (lenghtHistoryCart == 5 && !historyCart['p_' + id]) {
+        if (lenghtHistoryCart == 4 && !historyCart['p_' + id]) {
             deleteLastElObject(historyCart, lenghtHistoryCart);
-            historyCart['p_' + id] = cart[id];
+            historyCart['p_' + id] = cart['p_' + id];
         } else if (lenghtHistoryCart == 5) {
             delete historyCart['p_' + id];
-            historyCart['p_' + id] = cart[id];
+            historyCart['p_' + id] = cart['p_' + id];
         } else {
-            historyCart['p_' + id] = cart[id];
+            historyCart['p_' + id] = cart['p_' + id];
         }
+        historyCart['p_' + id]['count'] = 0;
         localStorage.setItem('historyCart', JSON.stringify(historyCart));
         delete cart['p_' + id];
         updateTotal();
         localStorage.setItem('cart', JSON.stringify(cart));
-    } else if (target.tagName == 'INPUT') {
+        updateHistoryProducts();
+    } else if (target.tagName == 'INPUT' && !target.parentNode.classList.contains('content__checkbox')) {
         const productID = target.closest('.product').dataset.id;
 
-        if (cart[productID]['selected']){
-            cart[productID]['selected'] = false;
+        if (cart['p_' + productID]['selected']){
+            cart['p_' + productID]['selected'] = false;
         } else{
-            cart[productID]['selected'] = true;
+            cart['p_' + productID]['selected'] = true;
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         updateTotal();
+    } else if (target.classList.contains('content__sort-item')) {
+        const filters = document.querySelectorAll('input.content__sort-item:checked');
+        const typeSort = document.querySelector('.content__sort-item._active').dataset.typeSort;
+
+        if (filters.length > 1) {
+            sortingGoods(typeSort, 'all');
+        } else if(filters.length === 0) {
+            sortingGoods(typeSort);
+        } else {
+            sortingGoods(typeSort, filters[0].dataset.filter);
+        }
     }
 });
+
+async function sortingGoods(typeSort, filter = 'none') {
+    const contentBody = document.querySelector('.content__body');
+    let key, key_type;
+    if (get('category')) {
+        key = get('category');
+        key_type = 'cat';
+    } else {
+        key = get('type');
+        key_type = 'type';
+    }
+
+    contentBody.classList.add('_load');
+    let response = await fetch('/4. Apteka42/php/goods.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `type_sort=${typeSort}&key=${key}&key_type=${key_type}&filter=${filter}`,
+    });
+    if (response.ok) {
+        let result = await response.text();
+        contentBody.innerHTML = result;
+        setBGI();
+    } else {
+        alert('Ошибка!');
+    }
+    contentBody.classList.remove('_load');
+}
+
+function get(key) {
+    let url = window.location.search;
+
+    url = url.match(new RegExp(key + '=([^&=]+)'));
+
+    return url ? url[1] : false;
+}
 
 function addProductToCart(product){
     const id = product.dataset.id,
           img = product.querySelector('.product__img img').getAttribute('src'),
           label = product.querySelector('.product__label').innerText,
+          country = product.querySelector('.product__country').innerText,
           price = product.querySelector('.product__price .price').innerText;
 
     cart['p_' + id] = {
@@ -302,8 +376,14 @@ function addProductToCart(product){
         'price': price,
         'count': 1,
         'selected': true,
+        'country': country,
     };
     localStorage.setItem('cart', JSON.stringify(cart));
+    if (totalContainer) {
+        updateTotal();
+    }
+    document.querySelector('.header__cart span').innerText = lengthObject(cart);
+    document.querySelector('.header__cart span').classList.remove('_hide');
 }
 
 function plusCountProduct(operator = '+', productID) {
@@ -316,7 +396,6 @@ function plusCountProduct(operator = '+', productID) {
         } else {
             return --cart['p_' + productID]['count'];
         }
-        
     } else {
         alert('Ошибка');
     }
@@ -327,6 +406,7 @@ function renderProductsInCart(){
     const cartContainer = document.querySelector('.content__cart');
     
     if (cartContainer) {
+        cartContainer.innerHTML = '';
         for (const id in cart) {
             const product = cart[id],
                   productHTML = renderProductInCart(id.replace('p_', ''), product);
@@ -385,6 +465,16 @@ function updateTotal(){
         totalPriceBlock.innerText = totalPrice.toFixed(2);
         totalBlock.innerText = totalPrice.toFixed(2);
         countProductBlock.innerText = totalCount + ' ' + converWordEndings(totalCount, ['товар', 'товара', 'товаров']);
+        if (totalCount == 0) {
+            document.querySelector('.content__cart').classList.add('_zero');
+            document.querySelector('.content__sidebar').classList.add('_hide');
+            document.querySelector('.header__cart span').classList.add('_hide');
+        } else {
+            document.querySelector('.content__cart').classList.remove('_zero');
+            document.querySelector('.content__sidebar').classList.remove('_hide');
+            document.querySelector('.header__cart span').classList.remove('_hide');
+            document.querySelector('.header__cart span').innerText = totalCount;
+        }
     }
 }
 
@@ -423,6 +513,65 @@ function deleteLastElObject(obj, length){
         count++;
         if (count == length){
             delete obj[key];
+        }
+    }
+}
+
+renderProductsInHistory();
+
+function renderProductsInHistory() {
+    const historyContent = document.querySelector('.content_history');
+    let toRemove = true;
+    let historyBlock;
+
+    if (historyContent) {
+        historyBlock = historyContent.querySelector('.content__body');
+
+        for (const key in historyCart) {
+            toRemove = false;
+            const el = historyCart[key];
+            historyBlock.insertAdjacentHTML('afterbegin', renderProductInHistory(key.replace('p_', ''), el));
+        }
+        if (toRemove) historyContent.classList.add('_hide');
+        updateProducts();
+    }
+}
+
+function renderProductInHistory(id, data) {
+    return `<div class="content__product product product_history" data-id="${id}">
+                <a href="#" class="product__img bgi" style="background-image: url(${data['img']});"><img src="${data['img']}" alt="product"></a>
+                <a href="#" class="product__label">${data['label']}</a>
+                <div class="product__country">${data['country']}</div>
+                <div class="product__price">
+                    <span>Цена:</span>
+                    <span class="price">${data['price']}</span>
+                </div>
+                <div class="product__btn">
+                    <button class="product__buy">
+                        Добавить в корзину
+                    </button>
+                </div>
+            </div>`;
+}
+
+function updateHistoryProducts() {
+    const historyContent = document.querySelector('.content_history');
+
+    if (historyContent) {
+        historyContent.classList.remove('_hide');
+        historyContent.querySelector('.content__body').innerHTML = '';
+        renderProductsInHistory();
+    }
+}
+
+window.onstorage = function(event) {
+    if (event.key == 'cart') {
+        cart = JSON.parse(event.newValue);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateProducts();
+        renderProductsInCart();
+        if (document.querySelector('.content__total')) {
+            updateTotal();
         }
     }
 }
