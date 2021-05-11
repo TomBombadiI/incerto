@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,12 +19,17 @@
         <header class="header">
             <div class="header__body _container">
                 <div class="header__top">
-                    <div class="header__logo"><img src="images/1.header/1.logo.png" alt="logo"></div>
+                    <a href="/4. Apteka42/" class="header__logo"><img src="images/1.header/1.logo.png" alt="logo"></a>
                     <a href="tel:+79502786300" class="header__tel">8 (800) 555 35-35</a>
                     <div class="header__search">
                         <div class="header__search-input">
                             <input type="text" class="search" placeholder="Поиск товара" name="search">
                             <button class="header__search-btn" type="submit">поиск</button>
+                            <!-- <ul class="header__search-list">
+                                <li><a href="#" class="header__search-link">
+                                    <div class="header__search__image"></div>
+                                </a></li>
+                            </ul> -->
                         </div>
                         <div class="header__search-example">
                             Например:
@@ -35,7 +42,8 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="cart.html" class="header__cart">
+                    <a href="cart.php" class="header__cart">
+                        <span class="_hide"></span>
                         <img src="images/1.header/2.cart.svg" alt="Cart">
                         Корзина
                     </a>
@@ -68,23 +76,23 @@
                         <div id="tab_1" class="aside__block _active">
                             <nav class="aside__nav">
                                 <ul>
-                                    <li><a href="#" class="aside__link">Базовый уход</a></li>
-                                    <li><a href="#" class="aside__link">Профессиональная косметика</a></li>
-                                    <li><a href="#" class="aside__link">Витамины и добавки</a></li>
-                                    <li><a href="#" class="aside__link">Болезни суставов</a></li>
-                                    <li><a href="#" class="aside__link">Зрение</a></li>
-                                </ul>
+                                                                            <li><a href="categories.php?parent_category=1" class="aside__link">Базовый уход</a></li>
+                                                                            <li><a href="categories.php?parent_category=2" class="aside__link">Профессиональная косметика</a></li>
+                                                                            <li><a href="categories.php?parent_category=3" class="aside__link">Витамины и добавки</a></li>
+                                                                            <li><a href="categories.php?parent_category=4" class="aside__link">Болезни сустовов</a></li>
+                                                                            <li><a href="categories.php?parent_category=5" class="aside__link">Зрение</a></li>
+                                                                    </ul>
                             </nav>
                         </div>
                         <div id="tab_2" class="aside__block">
                             <nav class="aside__nav">
                                 <ul>
-                                    <li><a href="#" class="aside__link">Лекарственные средства</a></li>
-                                    <li><a href="#" class="aside__link">БАДы</a></li>
-                                    <li><a href="#" class="aside__link">Медицинские товары и техника</a></li>
-                                    <li><a href="#" class="aside__link">Медицинские изделия и контактные линзы</a></li>
-                                    <li><a href="#" class="aside__link">Детские товары</a></li>
-                                </ul>
+                                                                            <li><a href="products.php?type=1" class="aside__link">Лекарственные средства</a></li>
+                                                                            <li><a href="products.php?type=2" class="aside__link">БАДы</a></li>
+                                                                            <li><a href="products.php?type=3" class="aside__link">Медицинские товары и техника</a></li>
+                                                                            <li><a href="products.php?type=4" class="aside__link">Медицинские изделия и контактные линзы</a></li>
+                                                                            <li><a href="products.php?type=5" class="aside__link">Детские товары</a></li>
+                                                                    </ul>
                             </nav>
                         </div>
                     </div>
@@ -92,135 +100,63 @@
                 <content class="content">
                     <div class="content__title">Ваш выбор</div>
                     <div class="content__body">
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
+                                                    <div class="content__product product" data-id="1">
+                                <a href="#" class="product__img bgi"><img src="images/goods_image/1.jpg" alt="product"></a>
+                                <a href="#" class="product__label">Крем Детский с экстрактом череды 45 мл.</a>
+                                <div class="product__country">Россия</div>
+                                <div class="product__price">
+                                    <span>Цена:</span>
+                                    <span class="price">29.00</span>
+                                </div>
+                                <div class="product__btn">
+                                    <button class="product__buy">
+                                        Добавить в корзину
+                                    </button>
+                                </div>
                             </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                         <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
+                                                    <div class="content__product product" data-id="2">
+                                <a href="#" class="product__img bgi"><img src="images/goods_image/2.jpg" alt="product"></a>
+                                <a href="#" class="product__label">ВЕСНА Крем косм. Детский с экстрактом чистотела 45мл</a>
+                                <div class="product__country">Россия</div>
+                                <div class="product__price">
+                                    <span>Цена:</span>
+                                    <span class="price">19.00</span>
+                                </div>
+                                <div class="product__btn">
+                                    <button class="product__buy">
+                                        Добавить в корзину
+                                    </button>
+                                </div>
                             </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
+                                                    <div class="content__product product" data-id="3">
+                                <a href="#" class="product__img bgi"><img src="images/goods_image/3.jpg" alt="product"></a>
+                                <a href="#" class="product__label">Крем детский защитный под подгузник "Тик-Так", 41г</a>
+                                <div class="product__country">Россия</div>
+                                <div class="product__price">
+                                    <span>Цена:</span>
+                                    <span class="price">78.00</span>
+                                </div>
+                                <div class="product__btn">
+                                    <button class="product__buy">
+                                        Добавить в корзину
+                                    </button>
+                                </div>
                             </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
+                                                    <div class="content__product product" data-id="4">
+                                <a href="#" class="product__img bgi"><img src="images/goods_image/4.jpg" alt="product"></a>
+                                <a href="#" class="product__label">"Ушастый нянь" шампунь детский витаминный 200 мл.</a>
+                                <div class="product__country">Россия</div>
+                                <div class="product__price">
+                                    <span>Цена:</span>
+                                    <span class="price">96.00</span>
+                                </div>
+                                <div class="product__btn">
+                                    <button class="product__buy">
+                                        Добавить в корзину
+                                    </button>
+                                </div>
                             </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                        <div class="content__product product">
-                            <a href="#" class="product__img bgi"><img src="images/2.main/1.product.jpg" alt="product"></a>
-                            <a href="#" class="product__label">Акулий жир Акулья сила Гиалуроновая маска для лица от отеков и морщин с
-                                лифтинг-эффектом Облепиха с медом, 10 мл</a>
-                            <div class="product__country">Россия</div>
-                            <div class="product__price">
-                                <span>Цена:</span>
-                                <span class="price">194</span>
-                            </div>
-                            <button class="product__buy">
-                                Добавить в корзину
-                            </button>
-                        </div>
-                    </div>
+                                            </div>
                 </content>
             </div>
         </main>
