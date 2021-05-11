@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -5,7 +7,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/nouislider.min.css">
     <link rel="stylesheet" href="style/style.css">
     <title>Корзина</title>
 </head>
@@ -18,12 +19,17 @@
         <header class="header">
             <div class="header__body _container">
                 <div class="header__top">
-                    <div class="header__logo"><img src="images/1.header/1.logo.png" alt="logo"></div>
+                    <a href="/4. Apteka42/" class="header__logo"><img src="images/1.header/1.logo.png" alt="logo"></a>
                     <a href="tel:+79502786300" class="header__tel">8 (800) 555 35-35</a>
                     <div class="header__search">
                         <div class="header__search-input">
                             <input type="text" class="search" placeholder="Поиск товара" name="search">
                             <button class="header__search-btn" type="submit">поиск</button>
+                            <!-- <ul class="header__search-list">
+                                <li><a href="#" class="header__search-link">
+                                    <div class="header__search__image"></div>
+                                </a></li>
+                            </ul> -->
                         </div>
                         <div class="header__search-example">
                             Например:
@@ -37,6 +43,7 @@
                         </div>
                     </div>
                     <a href="cart.html" class="header__cart">
+                        <span class="_hide"></span>
                         <img src="images/1.header/2.cart.svg" alt="Cart">
                         Корзина
                     </a>
@@ -69,33 +76,24 @@
                         <div id="tab_1" class="aside__block _active">
                             <nav class="aside__nav">
                                 <ul>
-                                    <li><a href="#" class="aside__link aside__link_main">Базовый уход</a></li>
-                                    <li><a href="#" class="aside__link _active">Лицо</a></li>
-                                    <li><a href="#" class="aside__link _hide">Телои</a></li>
-                                    <li><a href="#" class="aside__link _hide">Волосы и кожа головы</a></li>
-                                    <li><a href="#" class="aside__link _hide">Для детей</a></li>
-                                    <li><a href="#" class="aside__link _hide">Эфирные масла</a></li>
-                                </ul>
-                                <button class="aside__more-categories">
-                                    <span>все подкатегории</span>
-                                    <img src="images/2.main/5.arrow.svg" alt="arrow">
-                                </button>
+                                                                            <li><a href="#" class="aside__link">Базовый уход</a></li>
+                                                                            <li><a href="#" class="aside__link">Профессиональная косметика</a></li>
+                                                                            <li><a href="#" class="aside__link">Витамины и добавки</a></li>
+                                                                            <li><a href="#" class="aside__link">Болезни сустовов</a></li>
+                                                                            <li><a href="#" class="aside__link">Зрение</a></li>
+                                                                    </ul>
                             </nav>
                         </div>
                         <div id="tab_2" class="aside__block">
                             <nav class="aside__nav">
                                 <ul>
-                                    <li><a href="#" class="aside__link">Лекарственные средства</a></li>
-                                    <li><a href="#" class="aside__link">БАДы</a></li>
-                                    <li><a href="#" class="aside__link">Медицинские товары и техника</a></li>
-                                    <li><a href="#" class="aside__link">Медицинские изделия и контактные линзы</a></li>
-                                    <li><a href="#" class="aside__link">Детские товары</a></li>
-                                </ul>
+                                                                            <li><a href="#" class="aside__link">Лекарственные средства</a></li>
+                                                                            <li><a href="#" class="aside__link">БАДы</a></li>
+                                                                            <li><a href="#" class="aside__link">Медицинские товары и техника</a></li>
+                                                                            <li><a href="#" class="aside__link">Медицинские изделия и контактные линзы</a></li>
+                                                                            <li><a href="#" class="aside__link">Детские товары</a></li>
+                                                                    </ul>
                             </nav>
-                        </div>
-                    </div>
-                    <div class="aside__filter">
-                        <div class="aside__filter-price">
                         </div>
                     </div>
                 </aside>
@@ -106,22 +104,31 @@
                         </div>
                         <div class="content__sidebar">
                             <div class="content__total">
-                                <div class="content__total-item">
-                                    Выбрано
-                                    <span id="totalCount">5</span>
-                                </div>
-                                <div class="content__total-item content__total-item_min">
-                                    Товары
-                                    <span id="totalPrice" class="price">500.00</span>
-                                </div>
-                                <div class="content__total-item content__total-item_hr">
-                                    Итого
-                                    <span id="total" class="price">500.00</span>
+                                <div class="content__total-info">
+                                    <div class="content__total-item">
+                                        Выбрано
+                                        <span id="totalCount">5</span>
+                                    </div>
+                                    <div class="content__total-item content__total-item_min">
+                                        Товары
+                                        <span id="totalPrice" class="price">500.00</span>
+                                    </div>
+                                    <div class="content__total-item content__total-item_hr">
+                                        Итого
+                                        <span id="total" class="price">500.00</span>
+                                    </div>
                                 </div>
                                 <button class="content__arrange">Оформить</button>
                             </div>
                         </div>
                     </div>
+                    <div class="content content_history">
+                        <div class="content__title">Недавно удалённые...</div>
+                        <div class="content__body">
+                            
+                        </div>
+                    </div>
+                    
                 </content>
             </div>
         </main>
@@ -135,7 +142,6 @@
     </div>
 
     <!-- Файл JavaScript-сценариев -->
-    <script src="script/nouislider.min.js"></script>
     <script src="script/script.js"></script>
 
 </body>
