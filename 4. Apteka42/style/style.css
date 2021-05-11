@@ -41,6 +41,21 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 ._hide{
 	display: none !important;
 }
+._load::before, ._load::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+._load::before{
+	background-color: rgba(255, 255, 255, 0.514);
+	filter: blur(10px);
+}
+._load::after {
+	background: url('../images/loading.gif') center / 50px no-repeat;
+}
 
 /* !Повторяющиеся стили */
 .bgi{
@@ -218,6 +233,20 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	position: relative;
 	z-index: 3;
 }
+.header__cart span{
+	position: absolute;
+	top: -8px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	background-color: #4665d7;
+	color: #fff;
+	display: flex;
+	align-items: center;justify-content: center;
+	border-radius: 50%;
+	font-size:11px;
+	font-weight: bold;
+}
 .header__cart img{
 	width: 30px;
 	height: 27px;
@@ -290,9 +319,17 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 		transition: all .3s ease 0s;
 		background-color: #fff;
 		overflow: auto;
+		padding-bottom: 80px;
 	}
 	.header__menu._active .menu__body{
 		transform: translateX(0);
+	}
+	.header__cart span{
+		width: 15px;
+		height: 15px;
+		font-size: 8px;
+		top: -5px;
+		right: 0px;
 	}
 }
 @media (max-width: 426px) {
@@ -438,16 +475,13 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 .aside__more-categories._active img{
 	transform: rotate(180deg);
 }
-.aside__filter{
-	margin-top: 35px;
-}
-.aside__filter-price{
-	width: 80%;
-	margin: 0 auto;
-}
 .content {
 	padding: 25px;
 	flex: 1 1 auto;
+}
+.content_history{
+	padding: 0;
+	margin-top: 50px;
 }
 .content__title {
 	color: #4665d7;
@@ -581,6 +615,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 	margin-top: 35px;
 	position: relative;
+	padding-bottom: 80px;
 }
 .content__body_flex{
 	display: flex;
@@ -594,21 +629,45 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 }
 .content__cart{
 	flex: 1 1 auto;
+	position: relative;
+	min-height: 300px;
+}
+.content__cart._zero::after{
+	content: 'Корзина пуста...';
+}
+.content__cart::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: url('../images/2.main/6.empty_cart.svg') center / 100px no-repeat;
+	font-size: 22px;
+	font-weight: bold;
+	color: #4665d7;
+	padding-top: 150px; padding-left: 25px;
 }
 .content__sidebar{
 	min-width: 200px;
 	margin-top: 20px;
 }
 .content__total {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    background-color: #f5f6fc;
     margin: -20px 0px 0px 0px;
     position: sticky;
     top: 80px;
     right: 0;
+	text-align: center;
+	background-color: #f5f6fc;
+	border-radius: 15px 15px 0 0;
+}
+.content__total-info{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
 }
 .content__total::after{
 	border: solid;
@@ -639,12 +698,13 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	border-top: 1px solid grey;
 }
 .content__arrange {
-	width: 100%;
+	width: 80%;
     padding: 15px 0;
     background: #4665d7;
     color: #fff;
     font-size: 15px;
     border-radius: 25px;
+	margin-bottom: 10px;
 }
 .product {
 	display: flex;
@@ -880,6 +940,38 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 		bottom: 0;
 		left: 0;
 		width: 100%;
+		z-index: 5;
+	}
+	.content__total{
+		display: flex;
+	}
+	.content__total-info{
+		flex-direction: column;
+		align-items: start;
+		flex: 1 1 auto;
+	}
+	.content__total-item{
+		max-width: 225px;
+		font-size: 16px;
+		display: flex;
+		justify-content: space-between;
+		margin: 0; margin-top: 5px;
+	}
+	.content__total-item .price{
+		font-size: 16px;
+	}
+	.content__total-item_min{
+		display: none;
+	}
+	.content__arrange{
+		width: auto;
+		align-self: center;
+		padding: 15px 35px;
+		margin: 0px 0px 0px auto;
+	}
+	.content__total-item_hr{
+		padding: 0;
+		border-top: unset;
 	}
 }
 @media (max-width: 426px) {
